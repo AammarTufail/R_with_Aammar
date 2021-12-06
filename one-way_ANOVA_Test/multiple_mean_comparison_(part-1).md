@@ -2,7 +2,7 @@
 title: "Most common statistical tests in R (Part-1)"
 author: RwithAammar [Codanics](https://www.youtube.com/channel/UCmNXJXWONLNF6bdftGY0Otw/playlists)
 date: "12/6/2021"
-output: html_document
+output: github_document
 ---
 # All about multiple comparison of means from RAW data to publication ready graphs in R.
 
