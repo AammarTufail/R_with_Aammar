@@ -62,12 +62,6 @@ p1 <- ggboxplot(ToothGrowth, x = "dose", y = "len",
 
 ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-``` r
-p1
-```
-
-![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
-
 ## showing mean comparisons
 
 Specify the comparisons you want
@@ -124,7 +118,7 @@ p1 <- p1 + stat_compare_means(comparisons = my_comparisons)+ # Add pairwise comp
 
 ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-# multiple grouping variable
+# Multiple grouping variable
 
 ## Box plot facetted by “dose”
 
@@ -146,42 +140,64 @@ p2 <- p2 + stat_compare_means(
 
 ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
 
+# Making (Converting boxplots) into violin plots
+
 ``` r
-p2
+p3 <- ggviolin(ToothGrowth, x = "dose", y = "len",
+                color = "dose", palette =c("#00AFBB", "#E7B800", "#FC4E07"),
+                add = "jitter", shape = "dose", 
+                xlab = "Dose", ylab = "Length", legend.title="Dose");p3
 ```
 
-![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-8-3.png)<!-- -->
+![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
-|                                                                                                                                                                                                             |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| # Making (Converting boxplots) into violin plots                                                                                                                                                            |
-| `r p3 <- ggviolin(ToothGrowth, x = "dose", y = "len", color = "dose", palette =c("#00AFBB", "#E7B800", "#FC4E07"), add = "jitter", shape = "dose", xlab = "Dose", ylab = "Length", legend.title="Dose");p3` |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->                                                                                                                                       |
-| `r p3`                                                                                                                                                                                                      |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-9-2.png)<!-- -->                                                                                                                                       |
-| # show mean comparisons and Specify the comparisons you want                                                                                                                                                |
-| `r my_comparisons <- list( c("0.5", "1"), c("1", "2"), c("0.5", "2") )`                                                                                                                                     |
-| # show significant stars                                                                                                                                                                                    |
-| `r p3 <- p3 + stat_compare_means(comparisons = my_comparisons, method = "t.test", label = "p.signif")+ # Add pairwise comparisons p-value stat_compare_means(label.y = 50)+ylim(0,60);p3`                   |
-| `## Warning: Removed 25 rows containing missing values (geom_violin).`                                                                                                                                      |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->                                                                                                                                      |
-| `r p3`                                                                                                                                                                                                      |
-| `## Warning: Removed 25 rows containing missing values (geom_violin).`                                                                                                                                      |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->                                                                                                                                      |
-| ## 4- Violin plots with box plots inside                                                                                                                                                                    |
-| `r p4 <- ggviolin(ToothGrowth, x = "supp", y = "len", fill = "supp", palette = "npg", facet.by = "dose", short.panel.labs = FALSE, add = "boxplot", add.params = list(fill = "white"));p4`                  |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->                                                                                                                                      |
-| `r p4`                                                                                                                                                                                                      |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->                                                                                                                                      |
-| ### Use only p.format as label. Remove method name.                                                                                                                                                         |
-| `r p4 <- p4 + stat_compare_means( aes(label = paste0("p = ", ..p.format..)) );p4`                                                                                                                           |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->                                                                                                                                      |
-| `r p4`                                                                                                                                                                                                      |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-13-2.png)<!-- -->                                                                                                                                      |
-| `r p4 <- p4 + stat_compare_means( aes(label = paste0(..p.signif..)) );p4`                                                                                                                                   |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-13-3.png)<!-- -->                                                                                                                                      |
-| `r p4`                                                                                                                                                                                                      |
-| ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-13-4.png)<!-- -->                                                                                                                                      |
+# show mean comparisons and Specify the comparisons you want
+
+``` r
+my_comparisons <- list( c("0.5", "1"), c("1", "2"), c("0.5", "2") )
+```
+
+# show significant stars
+
+``` r
+p3 <- p3 + stat_compare_means(comparisons = my_comparisons,
+                        method = "t.test",
+                        label = "p.signif")+ # Add pairwise comparisons p-value
+  stat_compare_means(label.y = 50)+ylim(0,60);p3
+```
+
+    ## Warning: Removed 25 rows containing missing values (geom_violin).
+
+![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+## 4- Violin plots with box plots inside
+
+``` r
+p4 <- ggviolin(ToothGrowth, x = "supp", y = "len",
+                fill = "supp", palette = "npg",
+                facet.by = "dose", short.panel.labs = FALSE,
+               add = "boxplot", add.params = list(fill = "white"));p4
+```
+
+![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+### Use only p.format as label. Remove method name.
+
+``` r
+p4 <- p4 + stat_compare_means(
+  aes(label = paste0("p = ", ..p.format..))
+);p4
+```
+
+![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+``` r
+p4 <- p4 + stat_compare_means(
+  aes(label = paste0(..p.signif..))
+);p4
+```
+
+## ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-13-2.png)<!-- -->
 
 ############################################################### 
 
@@ -207,6 +223,7 @@ ggarrange(p1, p2, p3,p4 + rremove("x.text"),
     ## Warning: Removed 25 rows containing missing values (geom_violin).
 
 ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
 **saving High quality plot in working directory**
 
     ggarrange(p1, p2, p3,p4 + rremove("x.text"), 
@@ -236,7 +253,8 @@ ggarrange(p1,                                                 # First row with b
     ## cannot compute exact p-value with ties
 
 ![](03-ggpubr-readme-_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
-**saving plot**
+
+**saving plot in current working directory**
 
     ggarrange(p1,                                                 # First row with boxplt
               ggarrange(p2, p3, ncol = 2, labels = c("B", "C")), # Second row with violinplot
