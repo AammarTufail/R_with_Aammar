@@ -56,4 +56,4 @@ help("add_pval")
     dev.off()
 
 subscribe share our video at this
-(link)\[<https://studio.youtube.com/video/agPZErYUsRg/edit>\]
+(link)[https://youtu.be/agPZErYUsRg]
