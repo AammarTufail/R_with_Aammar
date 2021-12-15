@@ -205,7 +205,7 @@ p1 <- ggplot(mean_data2, aes(x = dose, y = len_mean,group=supp))  +
     y = "Length (cm)",
     title = "Publication Ready Group Barplot",
     subtitle = "Made by #RwithAammar",
-    fill = "Dose"
+    fill = "Supp"
   ) +
   #facet_wrap(~supp)+
   ylim(0,35)+ #change your yaxis limits based on the letters
@@ -228,7 +228,7 @@ p2 <- ggplot(mean_data2, aes(x = dose, y = len_mean,group=supp))  +
     y = "Length (cm)",
     title = "Publication Ready Group Barplot",
     subtitle = "Made by #RwithAammar",
-    fill = "Dose"
+    fill = "Supp"
   ) +
   facet_wrap(~supp)+
   ylim(0,35)+ #change your yaxis limits based on the letters
@@ -268,3 +268,5 @@ Best regards,
 *Dr. Muhammad Aammar Tufail*
 
 Google Certified Data Analyst
+
+(Ask you questions!)
